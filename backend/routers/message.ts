@@ -1,6 +1,7 @@
 import express from 'express';
 import { MessageWithoutId} from "../types";
 import fileDb from "../fileDb";
+import {imagesUpload} from "../multer";
 
 export const messagesRouter = express.Router();
 
@@ -10,7 +11,7 @@ messagesRouter.get('/', async (req, res) => {
     res.send(message);
 });
 
-messagesRouter.post('/', async (req, res) => {
+messagesRouter.post('/', imagesUpload.single('image'), async (req, res) => {
     if (!req.body.message) {
         res.status(400).send({error: "Please enter a message"});
         return;
