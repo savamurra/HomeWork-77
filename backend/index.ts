@@ -1,14 +1,17 @@
 import express = require("express");
-import {messagesRouter} from "./routers/messages";
+
 import fs = require("fs");
 import fileDb from "./fileDb";
 import cors from "cors";
+import {messagesRouter} from "./routers/message";
 
 const app = express();
 const port = 8000;
 
+
 app.use(cors())
 app.use(express.json());
+app.use(express.static('public'));
 app.use("/messages", messagesRouter);
 
 const run = async () => {
