@@ -7,6 +7,7 @@ import {useAppDispatch, useAppSelector} from "../../app/hooks.ts";
 import {allMessage, isCreating} from "./messageSlice.ts";
 import FileInput from "../../components/FileInput/FileInput.tsx";
 import {apiUrl} from "../../globalConstants.ts";
+import Spinner from "../../components/UI/Spinner/Spinner.tsx";
 
 
 const initialState = {
@@ -24,7 +25,7 @@ const ProductForm = () => {
     useEffect(() => {
         dispatch(getMessage());
     }, [dispatch]);
-    
+
 
     const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         const {name, value} = e.target;
@@ -146,6 +147,7 @@ const ProductForm = () => {
                     sx={{width: "100%"}}
                     disabled={createLoading}
                 >
+                    {createLoading ? <Spinner /> : null}
                     Send
                 </Button>
             </Box>
